@@ -1,0 +1,21 @@
+{% block content %}
+<div class="layout__body">
+    <form class="form" method="POST" action="">
+        {% csrf_token %}
+
+        <div class="form__group">
+            <p>Are you sure you want to delete "{{obj}}"?</p>
+        </div>
+
+        <div class="for__group">
+               <a href="{% url 'index' %}" class="btn btn-sussess"></a>
+            <input class="btn btn--main" type="submit" value="Confirm" />
+        </div>
+        <div class="for__group">
+         
+        </div>
+
+    </form>
+</div>
+
+{% endblock content %}

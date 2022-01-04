@@ -1,4 +1,4 @@
-{% include 'base/navbar.html '%}
+{% include 'base/navbar.html' %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +16,8 @@
   .container{
       display: grid;
       grid-template-columns: 1fr 3fr 1fr;
+   
+ 
 
   }
   .btn-info{
@@ -34,38 +36,23 @@
   
 <div class="container">
   <div>
-    <H1>Catogeries</H1>
+    {% include 'base/category.html '%} 
   </div>
 
-  <div >
 
-    {% for post in posts %}
-    <div class="jumbotron">
-         <h5>{{post.id}}-- <a href="/post/{{post.id}}">{{post.title}}</a></h5> 
-         <hr>
-         {{post.content|slice:200}}...
-         <br>
-         <br>
 
-         <a  href ="/post/{{post.id}}" type="button" class="btn btn-info">Read full blog</a>
+  
+    <div>
+      {% include 'base/post.html '%} 
     </div>
-    {% endfor %}
-  </div>
+   
+
 
   <div>
-    <button type="button" class="btn btn-primary btn-block">Write a  blog</button>
+    <a href="{% url 'postCreate' %}" type="button " class="btn btn-primary btn-block">Write a  blog</a>
   </div>
  
 </div> 
-
-
-
-
-
-    
-</div>
-
-
 
 </body>
 </html>
