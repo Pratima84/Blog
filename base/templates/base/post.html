@@ -12,9 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
   </head>
 <style>
-      .container{
     
-    }
     .fa-pencil{
         float: right;
         margin: 2%;
@@ -35,7 +33,7 @@
   {% for post in posts %}
   <div class="jumbotron">
 
-      <p>{{ post.catogery}}</p>
+     
       <a  href ="{% url 'deletePost' post.id %}" type="button"  class="fa fa-trash"></a>
       <a  href ="{% url 'updatePost' post.id %}" type="button" class="fa fa-pencil" ></a>
         

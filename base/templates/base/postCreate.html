@@ -1,8 +1,9 @@
-{% include 'base/navbar.html' %}
+{% extends 'main.html' %}
 
 
 {% load crispy_forms_tags %}
 {% block content %}
+{% if user.is_authenticated %}
 <div class="container" style="margin: 2%; padding: 2%; line-height:;">
 <form method="POST" action="" >
     {% csrf_token %}
@@ -11,5 +12,9 @@
     <input type="submit" value="Submit" class="btn btn-primary">
 </form>
 </div>
+
+{% else %}
+<p>Login to create a blog</p>
+{% endif %}
 {% endblock %}
 </body>

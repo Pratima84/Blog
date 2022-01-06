@@ -1,13 +1,21 @@
+{% include 'base/navbar.html' %}
+
 
 {% load crispy_forms_tags %}
 {% block content %}
+
+{% if user.is_authenticated %}
 <div class="container" style="margin: 2%; padding: 2%; line-height:;">
 <form method="POST" action="" >
     {% csrf_token %}
     {{ form|crispy }}
     <br>
-    <input type="submit" value="Submit" class="btn btn-primary">
+    <input type="submit" value="Update" class="btn btn-primary">
 </form>
 </div>
+{% else %}
+<p>Login to update your post</p>
+
+{% endif %}
 {% endblock %}
 </body>
