@@ -1,4 +1,4 @@
-{% include 'base/navbar.html' %}
+{% extends 'main.html' %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -26,8 +26,12 @@
 
 
   }
-  .btn-block{
+  .container_User{
     margin-left: 10%;
+  }
+  .container-user{
+    margin-left: 10%;
+    color: rgb(175, 170, 170);
   }
   </style>
 <body>
@@ -43,13 +47,21 @@
 
   
     <div>
+     
       {% include 'base/post.html '%} 
     </div>
    
 
 
-  <div>
+  <div class="container_User">
     <a href="{% url 'postCreate' %}" type="button " class="btn btn-primary btn-block">Write a  blog</a>
+    <br>
+    <div class="container"> 
+      <p>Participants</p>
+    <div> 
+    
+
+    </div>
   </div>
  
 </div> 
