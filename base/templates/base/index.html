@@ -47,18 +47,25 @@
 
   
     <div>
+      <h5>{{post_count}} Post available</h5>
+      <br>
      
       {% include 'base/post.html '%} 
     </div>
    
+  
 
 
   <div class="container_User">
+    
     <a href="{% url 'postCreate' %}" type="button " class="btn btn-primary btn-block">Write a  blog</a>
     <br>
     <div class="container"> 
       <p>Participants</p>
-    <div> 
+      {% for user in users %}
+      {{user.username}}
+      {% endfor %}
+    <div>  
     
 
     </div>

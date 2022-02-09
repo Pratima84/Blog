@@ -33,13 +33,10 @@
   {% for post in posts %}
   <div class="jumbotron">
 
-     
-      <a  href ="{% url 'deletePost' post.id %}" type="button"  class="fa fa-trash"></a>
-      <a  href ="{% url 'updatePost' post.id %}" type="button" class="fa fa-pencil" ></a>
-        
+
        <h1><a href="/post/{{post.id}}">{{post.title}}</a></h1> 
        <hr>
-       {{post.content|slice:200}}...
+       {{post.content|safe|slice:200}}..
        <br>
        <br>
 

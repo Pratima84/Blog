@@ -1,15 +1,19 @@
-
-from django import http
+from turtle import title
+from django.db.models import Q
+from django.db.models.query import QuerySet
 from django.contrib.auth import authenticate
 from django.contrib.auth.password_validation import password_changed
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
+from django.template import context
 from .forms import PostForm
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Category, Post
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate, login, logout
+
 
 #funstion for user registration
 
@@ -54,9 +58,17 @@ def logoutUser(request):
 
 #Render post detail to  index  
 def index(request):
-    categories= Category.objects.all
-    posts= Post.objects.all
-    context= {'posts':posts,'categories':categories} 
+    q= request.GET.get('q') if request.GET.get('q') != None else ''
+
+    posts= Post.objects.filter(
+        Q(category__name__icontains=q ) |
+        Q(title__icontains=q)|
+        Q(content__icontains=q)
+        )
+
+    categories=Category.objects.all
+    post_count = posts.count() 
+    context= {'posts':posts,'categories':categories,'post_count':post_count} 
     return render(request,'base/index.html',context)
     
   
@@ -78,20 +90,36 @@ def postDetail(request,post_id):
 
 
 #Create post function  
+@login_required(login_url = 'login')
 def postCreate(request):
-    form = PostForm(request.POST) 
-    if form.is_valid():  
-        try:  
-            form.save()  
-            return redirect('/index')  
-        except:  
-                pass  
-    else:  
-        form = PostForm()  
-        context= {'form':form, }
-
+    form = PostForm()
+    categories = Category.objects.all()
+    if request.method == 'POST':
+        category_name= request.POST.get('category') 
+        category, created = Category.objects.get_or_create(name = category_name)
+        Post.objects.create(
+          
+            category= category,
+            title=request.POST.get('title'),
+            content= request.POST.get('content'),
+        )
+        return redirect('index')
+        
+    context= {'form':form, 'categories':categories }
     return render(request,'base/postCreate.html', context)   
 
+
+    # if form.is_valid():  
+    #     try:  
+    #         form.save()  
+    #         return redirect('/index')  
+    #     except:  
+    #             pass  
+    # else:  
+    #     form = PostForm()  
+    #     context= {'form':form, }
+
+   
 
 #Update post function       
 def updatePost(request,pk):

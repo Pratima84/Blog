@@ -1,4 +1,4 @@
-{% include 'base/navbar.html' %}
+{% extends 'main.html' %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -38,15 +38,16 @@
 
   <div class="container">
       <div class="jumbotron">
-          <a  href ="" type="button"  class="fa fa-trash"></a>
-          <a  href ="" type="button" class="fa fa-pencil" ></a>
-      
+         
+      <a  href ="{% url 'deletePost' postDetail.id %}" type="button"  class="fa fa-trash"></a>
+      <a  href ="{% url 'updatePost' postDetail.id %}" type="button" class="fa fa-pencil" ></a>
+        
           <!-- /post/{{post.id}} -->
           <br>
-          <h1>  {{postDetail.title}}</h1>
+          <h1>  {{postDetail.title|safe}}</h1>
       
 
-        <p>  {{postDetail.content}}</p>
+        <p>  {{ postDetail.content|safe }}</p>
         <br>
 
       <p>  {{postDetail.pub_date}}</p>      
