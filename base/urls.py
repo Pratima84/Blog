@@ -19,6 +19,4 @@ urlpatterns=[
     path('category/', views.category, name="category"),
     
     
-    
 ]
-

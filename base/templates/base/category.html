@@ -3,19 +3,25 @@
       <h5>Browse category</h5>
       <a href="{% url 'index' %}" class="active">Total Catogery: <span>{{categories.count}}</span></a>
     
-    </div>
+
     <ul class="category_list">
 
   
         <br>
         <br>
+      <div>
+        <a href="{% url 'index' %}">All</a>
+
+      </div>
+
       {% for category in  categories %}
-      <li>
-        <a href="{{category.name}}">{{category.name}}</a>
-      </li>
+      <div>
+        <a href="{% url 'index'%}?q={{category.name}}">{{category.name}}</a>
+      </div>
       {% endfor %}
      
     </ul>
   </div>
+</div>
 <!--     
  #filter post by catogery -->
